@@ -11,7 +11,7 @@ class Ga(self):
         self.BestEvaluation=[]
         self.popsize=popsize
         self.codesize=codesize
-        self.CrossoverPropability=CrossoverPropability
+        self.MutationPropability=MutationPropability
         self.evaluations=[0 for i in range(popsize)]
 
     def Create(self):
