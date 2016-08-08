@@ -33,7 +33,7 @@ class Ga(self):
             if random.uniform(0,1)<self.MutationPropability:
                 code=self.Mutationmotion(self.yourcode[i])
                 while self.Constrain(code)==false:
-                    code=self.Crossmotion(self.yourcode[i],self.yourcode[random.randint(0,len(self.yourcode))])
+                    code=self.Mutationmotion(self.yourcode[i])
                 self.yourcode[i]=code
     def Crossover(self):
         code=[[0 for i in range(len(self.yourcode[0]))] for j in range(len(self.yourcode))]
