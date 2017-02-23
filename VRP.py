@@ -35,6 +35,14 @@ W_punish = 10
 #货车载重
 capacity = 10
 
+SmellPropability = 0.5
+
+versionsize =50
+
+smellsize = 20
+
+codesize =8
+
 def ReadData(file):
     distance = []
     for line in open(file):
@@ -92,7 +100,7 @@ def Evaluate(code):
 
 
 if __name__ == "__main__":
-    foa = FOA()
+    foa = FOA(SmellPropability,versionsize,smellsize,codesize)
     ( Besteva , Bestcode) = foa.main(N)
     print(Besteva)
     print(Bestcode)
