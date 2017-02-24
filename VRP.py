@@ -35,7 +35,7 @@ W_punish = 10
 #货车载重
 capacity = 10
 
-SmellPropability = 0.5
+SmellPropability = 0.4
 
 versionsize =50
 
@@ -43,10 +43,12 @@ smellsize = 20
 
 codesize =8
 
+generation = 50
+
 def ReadData(file):
     distance = []
     for line in open(file):
-        line = line.split(' ')
+        line = line.strip('\n').split(' ')
         distance.append(line)
     return (distance)
 
@@ -71,19 +73,19 @@ def Constraint(code):
     return True
 
 def Evaluate(code):
-    distance = ReadData(distance_file.txt)
+    distance = ReadData("distance_file.txt")
     sum_cost = 0
     for track in code:
         star_time = 0
         for i in range(len(track)+1):
             if i == 0:
-                cost_time = distance[0][track[i]] + service_time[track[i]]
+                cost_time = int(distance[0][track[i]]) + service_time[track[i]]
                 punish_cost = Punishment(star_time , track[i])
                 each_cost = cost[track[i]]*require[track[i]]
             elif i == len(track):
-                cost_time = distance[track[i]][0] 
+                cost_time = int(distance[track[i-1]][0]) 
             else:
-                cost_time = distance[track[i-1]][track[i]] + service_time[track[i]]
+                cost_time = int(distance[track[i-1]][track[i]]) + service_time[track[i]]
                 punish_cost = Punishment(star_time , track[i])
                 each_cost = cost[track[i]]*require[track[i]]
             star_time = star_time + cost_time
@@ -100,7 +102,7 @@ def Evaluate(code):
 
 
 if __name__ == "__main__":
-    foa = FOA(SmellPropability,versionsize,smellsize,codesize)
+    foa = FOA.FOA(SmellPropability,versionsize,smellsize,codesize,generation)
     ( Besteva , Bestcode) = foa.main(N)
     print(Besteva)
     print(Bestcode)
