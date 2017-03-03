@@ -76,12 +76,12 @@ class FOA(object):
             #self.Crossover()
             self.Smell(N)
             self.BestEvaluation.append(min(self.evaluations))
-            #print (min(self.evaluations))
+            #print (min(self.evaluations)/len(self.evaluations))
             minindex=self.evaluations.index(min(self.evaluations))
             self.BestCode.append(self.yourcode[minindex])
         besteva=min(self.BestEvaluation)
         avergeeva = sum(self.BestEvaluation)/len(self.BestEvaluation)
         minindex=self.BestEvaluation.index(besteva)
         bestcode=self.BestCode[minindex]
-        return (besteva,bestcode,avergeeva)
+        return (besteva,bestcode,avergeeva,self.BestEvaluation)
 

@@ -35,18 +35,19 @@ W_punish = 10
 #货车载重
 capacity = 10
 
-SmellPropability = 0.1
+SmellPropability = 0.3
 
 #NP
-versionsize =12
+versionsize =18
 
 #SP
-smellsize = 5
+smellsize = 4
 
 codesize =8
 
 #G
-generation = 20
+generation = 50
+
 
 def ReadData(file):
     distance = []
@@ -106,7 +107,8 @@ def Evaluate(code):
 
 if __name__ == "__main__":
     foa = FOA.FOA(SmellPropability,versionsize,smellsize,codesize,generation)
-    ( Besteva , Bestcode , avergeeva) = foa.main(N)
+    ( Besteva , Bestcode , avergeeva , listeva) = foa.main(N)
+    print("每一代最优值：" , sorted(listeva,reverse=True))
     print("Average cost is" , avergeeva)
     print("Best cost is" , Besteva)
     print("Average track is" , Bestcode)
