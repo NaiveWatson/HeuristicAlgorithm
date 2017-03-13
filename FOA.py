@@ -8,7 +8,6 @@ import VRP
 class FOA(object):
     def __init__(self,SmellPropability,versionsize,smellsize,codesize,generation):
         self.yourcode=[]
-        self.BestCode=[]
         self.BestEvaluation=[]
         self.versionsize=versionsize
         self.smellsize=smellsize
@@ -71,6 +70,7 @@ class FOA(object):
         return evaluation
 
     def main(self , N):
+        BestCode=[]
         self.Create(N)
         for i in range(self.generation):
             #self.Crossover()
@@ -78,10 +78,11 @@ class FOA(object):
             self.BestEvaluation.append(min(self.evaluations))
             #print (min(self.evaluations)/len(self.evaluations))
             minindex=self.evaluations.index(min(self.evaluations))
-            self.BestCode.append(self.yourcode[minindex])
+            aaa=self.yourcode[minindex]
+            BestCode.append(copy.deepcopy(aaa))
         besteva=min(self.BestEvaluation)
         avergeeva = sum(self.BestEvaluation)/len(self.BestEvaluation)
         minindex=self.BestEvaluation.index(besteva)
-        bestcode=self.BestCode[minindex]
+        bestcode=BestCode[minindex]
         return (besteva,bestcode,avergeeva,self.BestEvaluation)
 

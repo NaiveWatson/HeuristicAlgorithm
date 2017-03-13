@@ -8,8 +8,6 @@ import math
 import json
 import FOA
 from functools import reduce
-from collections import defaultdict
-
 
 #需求量
 require = [ 2 , 1.5 , 4.5 , 3 , 1.5 , 4 , 2.5 , 3 ]
@@ -76,40 +74,22 @@ def Constraint(code):
             return False
     return True
 
-def Evaluate(code):
-    distance = ReadData("distance_file.txt")
-    sum_cost = 0
-    for track in code:
-        star_time = 0
-        for i in range(len(track)+1):
-            if i == 0:
-                cost_time = int(distance[0][track[i]]) + service_time[track[i]]
-                punish_cost = Punishment(star_time , track[i])
-                each_cost = cost[track[i]]*require[track[i]]
-            elif i == len(track):
-                cost_time = int(distance[track[i-1]][0]) 
-            else:
-                cost_time = int(distance[track[i-1]][track[i]]) + service_time[track[i]]
-                punish_cost = Punishment(star_time , track[i])
-                each_cost = cost[track[i]]*require[track[i]]
-            star_time = star_time + cost_time
-            sum_cost = sum_cost + punish_cost + each_cost
-
-
-    return (sum_cost)
-        
-
-
-
-    
-
-
-
-if __name__ == "__main__":
-    foa = FOA.FOA(SmellPropability,versionsize,smellsize,codesize,generation)
-    ( Besteva , Bestcode , avergeeva , listeva) = foa.main(N)
-    print("每一代最优值：" , sorted(listeva,reverse=True))
-    print("Average cost is" , avergeeva)
-    print("Best cost is" , Besteva)
-    print("Average track is" , Bestcode)
-
+code=[[0, 3, 6], [1, 5, 4], [2, 7]]
+distance = ReadData("distance_file.txt")
+sum_cost = 0
+for track in code:
+    star_time = 0
+    for i in range(len(track)+1):
+        if i == 0:
+            cost_time = int(distance[0][track[i]]) + service_time[track[i]]
+            punish_cost = Punishment(star_time , track[i])
+            each_cost = cost[track[i]]*require[track[i]]
+        elif i == len(track):
+            cost_time = int(distance[track[i-1]][0]) 
+        else:
+            cost_time = int(distance[track[i-1]][track[i]]) + service_time[track[i]]
+            punish_cost = Punishment(star_time , track[i])
+            each_cost = cost[track[i]]*require[track[i]]
+        star_time = star_time + cost_time
+        sum_cost = sum_cost + punish_cost + each_cost
+print(sum_cost)

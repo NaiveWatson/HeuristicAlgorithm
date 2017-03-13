@@ -73,10 +73,10 @@ class Ga(self):
         for i in range(self.generation):
             self.Crossover()
             self.Mutation()
-            self.BestEvaluation.append(max(self.evaluations))
-            maxindex=self.evaluations.index(max(self.evaluations))
+            self.BestEvaluation.append(min(self.evaluations))
+            maxindex=self.evaluations.index(min(self.evaluations))
             self.BestCode.append(self.yourcode[maxindex])
-        besteva=max(self.evaluations)
+        besteva=min(self.evaluations)
         bestcode=self.Bestcode[besteva]
         return besteva,bestcode
 
